@@ -165,8 +165,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Authentication settings
 LOGIN_URL = '/accounts/login'
-LOGIN_REDIRECT_URL = '/tweet/'
-LOGOUT_REDIRECT_URL = '/tweet/'
+LOGIN_REDIRECT_URL = '/'  # Redirect to home page (tweet list)
+LOGOUT_REDIRECT_URL = '/'  # Redirect to home page (tweet list) after logout
 
 # CSRF settings - Configure trusted origins for both development and production
 # Always configure CSRF trusted origins
@@ -176,9 +176,7 @@ CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000'
 ]
 
-# Add debug logging for CSRF settings
-print(f"DEBUG: CSRF_TRUSTED_ORIGINS = {CSRF_TRUSTED_ORIGINS}")
-print(f"DEBUG: DEBUG setting = {DEBUG}")
+# CSRF trusted origins configured for Railway and local development
 
 if not DEBUG:
     # Production settings

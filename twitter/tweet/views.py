@@ -3,9 +3,10 @@ from .models import Tweet
 from .forms import TweetForm, UserRegistrationForm
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.http import HttpResponse, Http404
 from django.conf import settings
+from django.contrib import messages
 import os
 
 def index(request):
@@ -77,5 +78,15 @@ def register(request):
         return redirect('tweet_list')
     else:
         form = UserRegistrationForm()
-    return render(request,'registration/register.html',{'form':form})    
+    return render(request,'registration/register.html',{'form':form})
+
+def custom_logout(request):
+    """Custom logout view that properly redirects to home page"""
+    if request.method == 'POST':
+        logout(request)
+        messages.success(request, 'You have been logged out successfully!')
+        return redirect('tweet_list')  # Redirect to home page
+    else:
+        # If GET request, redirect to home
+        return redirect('tweet_list')
 
