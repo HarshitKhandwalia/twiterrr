@@ -3,6 +3,9 @@ import os
 import subprocess
 import sys
 
+# Change to the twitter directory where manage.py and wsgi.py are located
+os.chdir('twitter')
+
 # Get the port from environment, default to 8000 if not set
 port = os.environ.get('PORT', '8000')
 
@@ -16,6 +19,7 @@ cmd = [
 ]
 
 print(f"Starting server on port {port}")
+print(f"Working directory: {os.getcwd()}")
 print(f"Command: {' '.join(cmd)}")
 
 # Execute gunicorn
