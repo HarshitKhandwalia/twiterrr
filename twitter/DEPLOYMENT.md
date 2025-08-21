@@ -118,6 +118,8 @@ DjangoTwitter/
 - ✅ `RAILWAY_ENVIRONMENT`: Automatically set by Railway
 - ✅ `DATABASE_URL`: Automatically provided by Railway (if PostgreSQL service added)
 
+**Note**: CSRF_TRUSTED_ORIGINS is automatically configured in settings.py for Railway domains.
+
 ### Media Files Troubleshooting:
 1. **Uploaded files disappear after deployment**: Ensure Railway Volume is configured with mount path `/app/media`
 2. **Can't access uploaded images**: Check that the volume is properly mounted
