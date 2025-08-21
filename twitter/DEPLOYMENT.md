@@ -25,6 +25,8 @@ git push origin main
 - **Build Command**: `./build.sh`
 - **Start Command**: `gunicorn twitter.wsgi:application --bind 0.0.0.0:$PORT`
 
+⚠️ **CRITICAL**: Do NOT use `python manage.py runserver` as the start command!
+
 ### 4. Environment Variables (Set in Render Dashboard)
 - `SECRET_KEY`: Generate a new secret key
 - `DEBUG`: Set to `False`
@@ -65,11 +67,23 @@ DjangoTwitter/
 ## Troubleshooting
 
 ### Common Issues:
-1. **Static files error**: Ensure the `static/` directory exists and contains files
-2. **Auth context processor error**: Fixed in settings.py
-3. **Port binding**: Use `$PORT` environment variable in start command
-4. **Build failures**: Check the build logs for specific error messages
+1. **400 Bad Request Error**: Usually caused by wrong start command
+2. **Static files error**: Ensure the `static/` directory exists and contains files
+3. **Auth context processor error**: Fixed in settings.py
+4. **Port binding**: Use `$PORT` environment variable in start command
+5. **Build failures**: Check the build logs for specific error messages
 
 ### If you see "No open ports detected":
 - Make sure your start command uses `$PORT` environment variable
-- The app should bind to `0.0.0.0:$PORT` 
+- The app should bind to `0.0.0.0:$PORT`
+
+### If you see "Starting development server":
+- You're using the wrong start command!
+- Use: `gunicorn twitter.wsgi:application --bind 0.0.0.0:$PORT`
+- NOT: `python manage.py runserver`
+
+### If you get 400 errors:
+1. Check that you're using gunicorn, not runserver
+2. Verify the start command is correct
+3. Check that DEBUG is set to False in production
+4. Ensure ALLOWED_HOSTS includes your Render domain 

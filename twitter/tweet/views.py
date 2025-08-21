@@ -4,9 +4,14 @@ from .forms import TweetForm, UserRegistrationForm
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
+from django.http import HttpResponse
+
 def index(request):
   return render(request,'index.html')
 
+def test_view(request):
+    """Simple test view to debug 400 errors"""
+    return HttpResponse("Test view working! Request method: " + request.method)
 
 def tweet_list(request):
   tweets = Tweet.objects.all().order_by('-created_at')
