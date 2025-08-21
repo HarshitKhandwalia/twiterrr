@@ -23,7 +23,7 @@ git push origin main
 - Railway will auto-detect Python and Django
 - **Root Directory**: Set to `twitter/` (where manage.py is located)
 - **Build Command**: `pip install -r requirements.txt && python manage.py collectstatic --noinput`
-- **Start Command**: `gunicorn twitter.wsgi:application --host 0.0.0.0 --port $PORT`
+- **Start Command**: `gunicorn twitter.wsgi:application --bind 0.0.0.0:$PORT`
 
 ⚠️ **CRITICAL**: Make sure the root directory points to the `twitter/` folder where `manage.py` is located!
 
@@ -60,7 +60,7 @@ A `railway.toml` file has been created in the project root to optimize Railway d
 builder = "nixpacks"
 
 [deploy]
-startCommand = "gunicorn twitter.wsgi:application --host 0.0.0.0 --port $PORT"
+startCommand = "gunicorn twitter.wsgi:application --bind 0.0.0.0:$PORT"
 restartPolicyType = "on_failure"
 
 [environments.production]
