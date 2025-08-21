@@ -73,6 +73,92 @@
             background-color: #c17c59 !important;
             color: #ffffff !important;
         }
+        
+        /* Auth Form Styling */
+        .auth-card {
+            background: linear-gradient(135deg, #fefcf7 0%, #f8f4ed 100%);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(139, 115, 85, 0.12);
+            border: 1px solid #e8dcc0;
+        }
+        
+        .auth-title {
+            color: #6b5b47;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .auth-subtitle {
+            color: #8b7355;
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 0;
+        }
+        
+        .form-label {
+            color: #6b5b47;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.2px;
+        }
+        
+        .form-control {
+            background-color: #ffffff;
+            border: 2px solid #e8dcc0;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            color: #6b5b47;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            background-color: #ffffff;
+            border-color: #d4a574;
+            box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25);
+            color: #6b5b47;
+        }
+        
+        .form-control::placeholder {
+            color: #b8a99a;
+        }
+        
+        .btn-lg {
+            padding: 0.875rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        
+        .auth-footer {
+            color: #8b7355;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        
+        .auth-link {
+            color: #d4a574;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-link:hover {
+            color: #c19a6b;
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            margin-top: 0.25rem;
+        }
+        
+        .text-danger {
+            color: #c17c59 !important;
+        }
     </style>
     <title>
         {% block title  %}
