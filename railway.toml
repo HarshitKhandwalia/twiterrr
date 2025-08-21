@@ -1,8 +1,9 @@
 [build]
 builder = "nixpacks"
+workingDirectory = "twitter"
 
 [deploy]
-startCommand = "cd twitter && gunicorn twitter.wsgi:application --bind 0.0.0.0:$PORT"
+startCommand = "gunicorn twitter.wsgi:application --bind 0.0.0.0:$PORT"
 restartPolicyType = "on_failure"
 
 [environments.production]
