@@ -7,24 +7,30 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #faf6f0;
         }
         .navbar-brand {
             font-size: 1.5rem;
             transition: all 0.3s ease;
+            color: #8b7355 !important;
         }
         .navbar-brand:hover {
             transform: scale(1.05);
-            color: #495057 !important;
+            color: #6b5b47 !important;
         }
         .nav-link {
             transition: all 0.3s ease;
             border-radius: 6px;
             padding: 8px 16px !important;
+            color: #8b7355 !important;
         }
         .nav-link:hover {
-            background-color: #e9ecef;
-            color: #495057 !important;
+            background-color: #e8dcc0;
+            color: #6b5b47 !important;
+        }
+        .navbar-text {
+            font-weight: 500;
+            color: #8b7355 !important;
         }
         .btn {
             transition: all 0.3s ease;
@@ -33,16 +39,39 @@
         .btn:hover {
             transform: translateY(-1px);
         }
-        .navbar-text {
-            font-weight: 500;
-        }
         .container {
-            background-color: #ffffff;
+            background-color: #fefcf7;
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(139, 115, 85, 0.15);
             padding: 1.5rem;
             margin-top: 1.5rem;
             margin-bottom: 1.5rem;
+            border: 1px solid #e8dcc0;
+        }
+        .btn-primary {
+            background-color: #d4a574 !important;
+            border-color: #d4a574 !important;
+            color: #ffffff !important;
+        }
+        .btn-primary:hover {
+            background-color: #c19a6b !important;
+            border-color: #c19a6b !important;
+        }
+        .btn-outline-primary {
+            color: #d4a574 !important;
+            border-color: #d4a574 !important;
+        }
+        .btn-outline-primary:hover {
+            background-color: #d4a574 !important;
+            color: #ffffff !important;
+        }
+        .btn-outline-danger {
+            color: #c17c59 !important;
+            border-color: #c17c59 !important;
+        }
+        .btn-outline-danger:hover {
+            background-color: #c17c59 !important;
+            color: #ffffff !important;
         }
     </style>
     <title>
@@ -52,7 +81,7 @@
     </title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-light border-bottom">
+    <nav class="navbar navbar-expand-lg" style="background-color: #f5f1eb; border-bottom: 2px solid #d4c4a8;">
         <div class="container">
           <!-- Brand/Logo -->
           <a class="navbar-brand fw-bold text-dark" href="{% url 'tweet_list' %}">
