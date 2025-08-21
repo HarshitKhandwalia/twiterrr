@@ -1,16 +1,36 @@
 {% extends "layout.html" %}
 
-{% block title %}
-chai aur code
-{% endblock title %}
-
 {% block content %}
-<h1 class = "text-center mt-4">Do you really wish to delete this tweet</h1>
-<form method = "post">
-    {% csrf_token %}
-    <button class = "btn btn-danger" >Delete</button>
-    <a href="{% url "tweet_list" %}" class = "btn btn-Cancle">Cancle</a>
-</form>
-
-
-{% endblock content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0" style="background-color: #fefefe; border-radius: 15px;">
+                <div class="card-body text-center p-5">
+                    <div class="mb-4">
+                        <i class="bi bi-exclamation-triangle text-warning" style="font-size: 3rem;"></i>
+                    </div>
+                    
+                    <h2 class="card-title mb-3" style="color: #8b7355; font-weight: 600;">
+                        Delete Tweet?
+                    </h2>
+                    
+                    <p class="mb-4" style="font-size: 1.1rem; line-height: 1.6; color: #6c757d; font-weight: 500;">
+                        Are you sure you want to delete this tweet? This action cannot be undone.
+                    </p>
+                    
+                    <form method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-lg me-3 px-4">
+                            <i class="bi bi-trash me-2"></i>Delete Tweet
+                        </button>
+                    </form>
+                    
+                    <a href="{% url 'tweet_list' %}" class="btn btn-outline-secondary btn-lg px-4">
+                        <i class="bi bi-x-circle me-2"></i>Cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

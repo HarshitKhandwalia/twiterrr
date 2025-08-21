@@ -1,28 +1,57 @@
 {% extends "layout.html" %}
 
 {% block title %}
-chai aur code
+Twiterrrrr - Your Tweets
 {% endblock title %}
 
 {% block content %}
-<h1 class = "text-center mt-4">welcome to my tweeter</h1>
-
-<a  class = "btn btn-primary mb-4" href="{% url "tweet_create" %}">create a tweet</a>
-<div class= "container row gap-3">
-    {% for tweet in tweets  %}
-    <div class="card" style="width: 18rem;">
-        {% if tweet.photo %}
-        <img src="{{tweet.photo.url}}" class="card-img-top" alt="Tweet image">
-        {% endif %}
-        <div class="card-body">
-          <h5 class="card-title">{{tweet.user.username}}</h5>
-          <p class="card-text">{{tweet.text}}</p>
-          {% if tweet.user == user %}
-          <a href="{% url "tweet_edit" tweet.id %}" class="btn btn-primary">edit</a>
-          <a href="{% url "tweet_del" tweet.id %}" class="btn  btn-danger">Delete</a>
-          {% endif %}
-        </div>
-      </div>
-    {% endfor %}
+<div class="tweet-header text-center mb-5">
+    <h1 class="tweet-title">Welcome to Twiterrrrr</h1>
+    <p class="tweet-subtitle">Share your thoughts with the world</p>
 </div>
+
+<div class="text-center mb-4">
+    <a href="{% url 'tweet_create' %}" class="btn btn-primary btn-lg">
+        <i class="bi bi-plus-circle me-2"></i>Create a Tweet
+    </a>
+</div>
+
+        <div class="tweet-cards-container">
+            {% for tweet in tweets %}
+            <div class="tweet-card-large">
+                {% if tweet.photo %}
+                <div class="tweet-image-container-large">
+                    <img src="{{tweet.photo.url}}" class="tweet-image-large" alt="Tweet image">
+                </div>
+                {% endif %}
+                
+                <div class="tweet-content-large">
+                    <div class="tweet-header-info-large">
+                        <div class="user-avatar-large">
+                            <i class="bi bi-person-circle"></i>
+                        </div>
+                        <div class="user-info-large">
+                            <h5 class="username-large">{{tweet.user.username}}</h5>
+                            <small class="timestamp-large">{{tweet.created_at|date:"d M Y • g:i A"}}</small>
+                        </div>
+                    </div>
+                    
+                    <div class="tweet-text-large">
+                        <p>{{tweet.text}}</p>
+                    </div>
+                    
+                    {% if tweet.user == user %}
+                    <div class="tweet-actions-large">
+                        <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-outline-primary">
+                            <i class="bi bi-pencil me-2"></i>Edit Tweet
+                        </a>
+                        <a href="{% url 'tweet_del' tweet.id %}" class="btn btn-outline-danger">
+                            <i class="bi bi-trash me-2"></i>Delete Tweet
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
 {% endblock content %}

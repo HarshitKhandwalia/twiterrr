@@ -1,25 +1,75 @@
 {% extends "layout.html" %}
 
 {% block title %}
-chai aur code
+{% if form.instance.pk %}Edit Tweet{% else %}Create Tweet{% endif %} - Twiterrrrr
 {% endblock title %}
 
 {% block content %}
-<h1 class = "text-center mt-4">welcome to my tweeter</h1>
+<div class="tweet-form-container">
+    <div class="tweet-form-header text-center mb-5">
+        <h1 class="tweet-form-title">
+            {% if form.instance.pk %}
+            Edit Your Tweet
+            {% else %}
+            Share Your Thoughts
+            {% endif %}
+        </h1>
+        <p class="tweet-form-subtitle">
+            {% if form.instance.pk %}
+            Make changes to your tweet
+            {% else %}
+            What's on your mind today?
+            {% endif %}
+        </p>
+    </div>
 
-<h2>
-    {% if form.instance.pk %}
-    Edit Tweet
-    {% else %}
-    Create Tweet
-    {% endif %}
-</h2>
-<form method = "post" enctype = "multipart/form-data" class = "form">
-    {% csrf_token %}
-    {{form.as_p}}
-    <button type = "submit", class= "btn btn-warning">Submit</button>
-    <a href="{% url "tweet_list" %}">back to tweet list</a>
-</form>
-
-
+    <div class="tweet-form-card">
+        <form method="post" enctype="multipart/form-data" class="tweet-form">
+            {% csrf_token %}
+            
+            <div class="form-group mb-4">
+                <label for="{{ form.text.id_for_label }}" class="form-label">
+                    <i class="bi bi-chat-text me-2"></i>Tweet Content
+                </label>
+                {{ form.text }}
+                {% if form.text.errors %}
+                    <div class="error-message">
+                        {% for error in form.text.errors %}
+                            <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group mb-4">
+                <label for="{{ form.photo.id_for_label }}" class="form-label">
+                    <i class="bi bi-image me-2"></i>Add Photo (Optional)
+                </label>
+                <div class="file-input-wrapper">
+                    {{ form.photo }}
+                    {% if form.photo.help_text %}
+                        <div class="helptext">{{ form.photo.help_text }}</div>
+                    {% endif %}
+                </div>
+                {% if form.photo.errors %}
+                    <div class="error-message">
+                        {% for error in form.photo.errors %}
+                            <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="bi bi-send me-2"></i>
+                    {% if form.instance.pk %}Update Tweet{% else %}Post Tweet{% endif %}
+                </button>
+                <a href="{% url 'tweet_list' %}" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-arrow-left me-2"></i>Back to Tweets
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock content %}

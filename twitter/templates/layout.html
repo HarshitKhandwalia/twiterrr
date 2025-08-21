@@ -159,6 +159,458 @@
         .text-danger {
             color: #c17c59 !important;
         }
+        
+        /* Tweet Card Styling */
+        .tweet-header {
+            margin-bottom: 3rem;
+        }
+        
+        .tweet-title {
+            color: #6b5b47;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .tweet-subtitle {
+            color: #8b7355;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+        
+        .tweet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .tweet-card {
+            background: linear-gradient(135deg, #fefcf7 0%, #f8f4ed 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(139, 115, 85, 0.1);
+            border: 1px solid #e8dcc0;
+            transition: all 0.3s ease;
+        }
+        
+        .tweet-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(139, 115, 85, 0.15);
+        }
+        
+        .tweet-image-container {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            background-color: #f5f1eb;
+        }
+        
+        .tweet-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .tweet-card:hover .tweet-image {
+            transform: scale(1.05);
+        }
+        
+        .tweet-content {
+            padding: 1.5rem;
+        }
+        
+        .tweet-header-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            gap: 0.75rem;
+        }
+        
+        .user-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #d4a574 0%, #c19a6b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .username {
+            color: #6b5b47;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .timestamp {
+            color: #b8a99a;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .tweet-text {
+            margin-bottom: 1.5rem;
+        }
+        
+        .tweet-text p {
+            color: #6b5b47;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+        
+        .tweet-actions {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: flex-end;
+        }
+        
+        .tweet-actions .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* Tweet Form Styling */
+        .tweet-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .tweet-form-header {
+            margin-bottom: 3rem;
+        }
+        
+        .tweet-form-title {
+            color: #6b5b47;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.5px;
+        }
+        
+        .tweet-form-subtitle {
+            color: #8b7355;
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+        
+        .tweet-form-card {
+            background: linear-gradient(135deg, #fefcf7 0%, #f8f4ed 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(139, 115, 85, 0.12);
+            border: 1px solid #e8dcc0;
+        }
+        
+        .tweet-form .form-label {
+            color: #6b5b47;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: 0.2px;
+        }
+        
+        .tweet-form .form-control {
+            background-color: #ffffff;
+            border: 2px solid #e8dcc0;
+            border-radius: 12px;
+            padding: 1rem 1.25rem;
+            font-size: 1.1rem;
+            color: #6b5b47;
+            transition: all 0.3s ease;
+            min-height: 120px;
+        }
+        
+        .tweet-form .form-control:focus {
+            background-color: #ffffff;
+            border-color: #d4a574;
+            box-shadow: 0 0 0 0.25rem rgba(212, 165, 116, 0.25);
+            color: #6b5b47;
+        }
+        
+        .file-input-wrapper {
+            background-color: #f8f4ed;
+            border: 2px dashed #d4a574;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .file-input-wrapper:hover {
+            background-color: #f5f1eb;
+            border-color: #c19a6b;
+        }
+        
+        /* File input styling */
+        .file-input-wrapper input[type="file"] {
+            display: block;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        .file-input-wrapper label {
+            color: #6b5b47;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        /* Django form styling for better visibility */
+        .file-input-wrapper p {
+            color: #6b5b47 !important;
+            font-size: 0.95rem !important;
+            margin-bottom: 0.5rem !important;
+            font-weight: 500 !important;
+        }
+        
+        .file-input-wrapper a {
+            color: #d4a574 !important;
+            text-decoration: none !important;
+            font-weight: 600 !important;
+        }
+        
+        .file-input-wrapper a:hover {
+            color: #c19a6b !important;
+            text-decoration: underline !important;
+        }
+        
+        .file-input-wrapper input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        
+        .file-input-wrapper .helptext {
+            color: #8b7355 !important;
+            font-size: 0.9rem !important;
+            font-style: italic !important;
+            margin-top: 0.5rem !important;
+        }
+        
+        /* Additional Django form styling */
+        .tweet-form input[type="file"] {
+            background-color: #ffffff;
+            border: 2px solid #d4a574;
+            border-radius: 8px;
+            padding: 0.75rem;
+            color: #6b5b47;
+            font-size: 0.95rem;
+        }
+        
+        .tweet-form input[type="file"]:focus {
+            border-color: #c19a6b;
+            box-shadow: 0 0 0 0.2rem rgba(212, 165, 116, 0.25);
+        }
+        
+        /* Make sure all form text is visible */
+        .tweet-form * {
+            color: #6b5b47 !important;
+        }
+        
+        .tweet-form label {
+            color: #6b5b47 !important;
+            font-weight: 600 !important;
+        }
+        
+        .tweet-form p {
+            color: #6b5b47 !important;
+            font-size: 0.95rem !important;
+            margin-bottom: 0.5rem !important;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .form-actions .btn {
+            padding: 0.875rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+        
+        /* Tweet Cards Styling - Grid Layout with Narrow Cards */
+        .tweet-cards-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+        
+        .tweet-card-large {
+            background: linear-gradient(135deg, #fefcf7 0%, #f8f4ed 100%);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(139, 115, 85, 0.1);
+            border: 1px solid #e8dcc0;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 380px;
+            justify-self: center;
+            aspect-ratio: 4/5;
+        }
+        
+        .tweet-card-large:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(139, 115, 85, 0.15);
+        }
+        
+        .tweet-image-container-large {
+            width: 100%;
+            height: 320px;
+            overflow: hidden;
+            background-color: #f5f1eb;
+            position: relative;
+            border-radius: 16px 16px 0 0;
+        }
+        
+        .tweet-image-large {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+        
+        .tweet-card-large:hover .tweet-image-large {
+            transform: scale(1.05);
+        }
+        
+        /* Photos are the main focus - show more context by zooming out slightly */
+        .tweet-image-container-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transform: scale(0.9);
+        }
+        
+        .tweet-content-large {
+            padding: 1rem;
+            background: rgba(254, 252, 247, 0.95);
+        }
+        
+        .tweet-header-info-large {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            gap: 0.5rem;
+        }
+        
+        .user-avatar-large {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #d4a574 0%, #c19a6b 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .user-info-large {
+            flex: 1;
+        }
+        
+        .username-large {
+            color: #6b5b47;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.15rem;
+        }
+        
+        .timestamp-large {
+            color: #b8a99a;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .tweet-text-large {
+            margin-bottom: 1rem;
+        }
+        
+        .tweet-text-large p {
+            color: #6b5b47;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+        }
+        
+        .tweet-actions-large {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-end;
+        }
+        
+        .tweet-actions-large .btn {
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 1400px) {
+            .tweet-cards-container {
+                grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+                max-width: 1200px;
+            }
+        }
+        
+        @media (max-width: 1000px) {
+            .tweet-cards-container {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                max-width: 900px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .tweet-form-card {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+            
+            .tweet-form-title {
+                font-size: 2rem;
+            }
+            
+            .tweet-cards-container {
+                grid-template-columns: 1fr;
+                max-width: 450px;
+                gap: 1rem;
+            }
+            
+            .tweet-card-large {
+                margin: 0;
+                max-width: 100%;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tweet-actions-large {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
     </style>
     <title>
         {% block title  %}
