@@ -1,8 +1,8 @@
-# Deployment Guide for Render
+# Deployment Guide for Railway
 
 ## Prerequisites
 - GitHub repository with your Django project
-- Render account
+- Railway account
 
 ## Steps to Deploy
 
@@ -13,57 +13,72 @@ git commit -m "Prepare for deployment"
 git push origin main
 ```
 
-### 2. Create a new Web Service on Render
-- Go to [render.com](https://render.com)
-- Click "New +" → "Web Service"
+### 2. Create a new Project on Railway
+- Go to [railway.app](https://railway.app)
+- Click "New Project" → "Deploy from GitHub repo"
 - Connect your GitHub repository
 - Choose the repository
 
-### 3. Configure the Web Service
-- **Name**: Choose a name for your app
-- **Environment**: Python 3
-- **Build Command**: `./build.sh`
-- **Start Command**: `gunicorn twitter.wsgi:application --bind 0.0.0.0:$PORT`
+### 3. Configure the Service
+- Railway will auto-detect Python and Django
+- **Root Directory**: Set to `twitter/` (where manage.py is located)
+- **Build Command**: `pip install -r requirements.txt && python manage.py collectstatic --noinput`
+- **Start Command**: `gunicorn twitter.wsgi:application --host 0.0.0.0 --port $PORT`
 
-⚠️ **CRITICAL**: Do NOT use `python manage.py runserver` as the start command!
+⚠️ **CRITICAL**: Make sure the root directory points to the `twitter/` folder where `manage.py` is located!
 
-### 4. Environment Variables (Set in Render Dashboard)
+### 4. Environment Variables (Set in Railway Dashboard)
 - `SECRET_KEY`: Generate a new secret key (IMPORTANT: Don't use the default one!)
 - `DEBUG`: Set to `False`
-- `ALLOWED_HOSTS`: Set to `twiterrr.onrender.com,localhost,127.0.0.1`
-- `RENDER`: Set to `true` (tells Django it's running on Render)
+- `ALLOWED_HOSTS`: Set to `your-app-name.up.railway.app,localhost,127.0.0.1`
+- `RAILWAY_ENVIRONMENT`: This is automatically set by Railway
 
 **⚠️ CRITICAL**: Generate a new SECRET_KEY! The default one in settings.py is not secure for production.
 
-### 5. Configure Persistent Disk for Media Files
-**IMPORTANT**: Set this up BEFORE your first deployment to avoid losing uploaded files!
+### 5. Configure Railway Volume for Media Files
+**IMPORTANT**: Set this up to persist uploaded files across deployments!
 
-1. **In the Render Dashboard**, go to your Web Service
-2. **Navigate to "Disks"** in the left sidebar
-3. **Click "Add Disk"**:
-   - **Name**: `media-storage` (or any name you prefer)
-   - **Mount Path**: `/opt/render/project/src/media`
-   - **Size**: Start with 1GB (you can expand later)
-4. **Save the disk configuration**
+1. **In the Railway Dashboard**, go to your service
+2. **Navigate to "Variables"** tab
+3. **Add a Volume**:
+   - **Mount Path**: `/app/media`
+   - **Size**: Railway provides free storage up to your plan limits
+4. **Deploy the changes**
 
-This persistent disk will store all uploaded media files (images, PDFs, etc.) and persist across deployments and restarts.
+This volume will store all uploaded media files (images, PDFs, etc.) and persist across deployments and restarts.
 
 ### 6. Database
-- Render will automatically provide a `DATABASE_URL` environment variable
-- The app will use PostgreSQL on Render and SQLite locally
+- Railway can provide a PostgreSQL database (add it as a service)
+- The app will use PostgreSQL on Railway and SQLite locally
+- Railway will automatically provide a `DATABASE_URL` environment variable
 
-### 7. Deploy
-- Click "Create Web Service"
-- Render will build and deploy your app automatically
+### 7. Configure railway.toml (Optional but Recommended)
+A `railway.toml` file has been created in the project root to optimize Railway deployment:
+
+```toml
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "gunicorn twitter.wsgi:application --host 0.0.0.0 --port $PORT"
+restartPolicyType = "on_failure"
+
+[environments.production]
+variables = { DEBUG = "False" }
+```
+
+### 8. Deploy
+- Railway will automatically deploy when you push to your connected branch
+- Monitor the build logs in the Railway dashboard
 
 ## File Structure
 ```
 DjangoTwitter/
-├── requirements.txt          # Production requirements (for Render)
-├── twitter/                 # Source directory (set in Render)
-│   ├── requirements.txt     # Local development requirements
-│   ├── build.sh            # Build script for Render
+├── requirements.txt          # Root requirements (if needed)
+├── twitter/                 # Source directory (set as Root Directory in Railway)
+│   ├── requirements.txt     # Main requirements file
 │   ├── static/             # Static files directory
+│   ├── media/              # Media files (local development)
 │   └── manage.py           # Django management
 ```
 
@@ -75,10 +90,11 @@ DjangoTwitter/
 
 ## Important Notes
 - Static files are automatically collected during build
-- **Media files are stored on a persistent disk** and won't be lost during deployments
-- The app automatically switches between SQLite (local) and PostgreSQL (Render)
+- **Media files are stored on Railway Volume** and won't be lost during deployments
+- The app automatically switches between SQLite (local) and PostgreSQL (Railway)
 - Media files are served by Django in production (suitable for hobby projects)
-- No Docker required - Render handles the containerization
+- Railway handles containerization automatically
+- Railway Volumes are included in most plans without extra cost
 
 ## Troubleshooting
 
@@ -98,11 +114,12 @@ DjangoTwitter/
 ### Environment Variables Checklist:
 - ✅ `SECRET_KEY`: New, secure key (generate one!)
 - ✅ `DEBUG`: `False`
-- ✅ `ALLOWED_HOSTS`: `twiterrr.onrender.com,localhost,127.0.0.1`
-- ✅ `RENDER`: `true` (enables persistent disk media storage)
-- ✅ `DATABASE_URL`: Automatically provided by Render
+- ✅ `ALLOWED_HOSTS`: `your-app-name.up.railway.app,localhost,127.0.0.1`
+- ✅ `RAILWAY_ENVIRONMENT`: Automatically set by Railway
+- ✅ `DATABASE_URL`: Automatically provided by Railway (if PostgreSQL service added)
 
 ### Media Files Troubleshooting:
-1. **Uploaded files disappear after deployment**: Ensure persistent disk is configured with mount path `/opt/render/project/src/media`
-2. **Can't access uploaded images**: Check that `RENDER=true` environment variable is set
-3. **Media files not displaying**: Verify the persistent disk is properly mounted and has sufficient storage
+1. **Uploaded files disappear after deployment**: Ensure Railway Volume is configured with mount path `/app/media`
+2. **Can't access uploaded images**: Check that the volume is properly mounted
+3. **Media files not displaying**: Verify the volume has sufficient storage and correct permissions
+4. **Build failures**: Ensure Root Directory is set to `twitter/` in Railway settings

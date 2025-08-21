@@ -37,11 +37,10 @@ DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 # Simple hosts configuration
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
-# Add your Render domain explicitly
+# Add your Railway domain explicitly
 if not DEBUG:
     ALLOWED_HOSTS.extend([
-        'twiterrr.onrender.com',
-        '.onrender.com',
+        '.up.railway.app',
         'localhost',
         '127.0.0.1'
     ])
@@ -145,10 +144,10 @@ MEDIA_URL = '/media/'
 
 # Configure MEDIA_ROOT based on environment
 # Locally: use media/ folder in project root
-# On Render: use /opt/render/project/src/media (backed by persistent disk)
-if os.environ.get('RENDER'):
-    # Production on Render - use persistent disk mount point
-    MEDIA_ROOT = '/opt/render/project/src/media'
+# On Railway: use /app/media (backed by Railway Volume)
+if os.environ.get('RAILWAY_ENVIRONMENT'):
+    # Production on Railway - use volume mount point
+    MEDIA_ROOT = '/app/media'
 else:
     # Local development - use media folder in project
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
