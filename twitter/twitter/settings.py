@@ -37,6 +37,15 @@ DEBUG = os.environ.get('DEBUG', 'True').lower() == 'true'
 # Allow all hosts for now to debug the 400 error
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
+# Add your Render domain explicitly
+if not DEBUG:
+    ALLOWED_HOSTS.extend([
+        'twiterrr.onrender.com',
+        '.onrender.com',
+        'localhost',
+        '127.0.0.1'
+    ])
+
 
 # Application definition
 
@@ -183,3 +192,33 @@ else:
 # CSRF settings
 CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', 'False').lower() == 'true'
 SESSION_COOKIE_SECURE = os.environ.get('SESSION_COOKIE_SECURE', 'False').lower() == 'true'
+
+# Logging
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}

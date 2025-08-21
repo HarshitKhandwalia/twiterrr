@@ -28,9 +28,11 @@ git push origin main
 ⚠️ **CRITICAL**: Do NOT use `python manage.py runserver` as the start command!
 
 ### 4. Environment Variables (Set in Render Dashboard)
-- `SECRET_KEY`: Generate a new secret key
+- `SECRET_KEY`: Generate a new secret key (IMPORTANT: Don't use the default one!)
 - `DEBUG`: Set to `False`
-- `ALLOWED_HOSTS`: Set to `your-app-name.onrender.com,localhost,127.0.0.1`
+- `ALLOWED_HOSTS`: Set to `twiterrr.onrender.com,localhost,127.0.0.1`
+
+**⚠️ CRITICAL**: Generate a new SECRET_KEY! The default one in settings.py is not secure for production.
 
 ### 5. Database
 - Render will automatically provide a `DATABASE_URL` environment variable
@@ -44,7 +46,7 @@ git push origin main
 ```
 DjangoTwitter/
 ├── requirements.txt          # Production requirements (for Render)
-├── twitter/
+├── twitter/                 # Source directory (set in Render)
 │   ├── requirements.txt     # Local development requirements
 │   ├── build.sh            # Build script for Render
 │   ├── static/             # Static files directory
@@ -62,28 +64,24 @@ DjangoTwitter/
 - Media files are handled by whitenoise
 - The app automatically switches between SQLite (local) and PostgreSQL (Render)
 - No Docker required - Render handles the containerization
-- The build script automatically finds the correct requirements.txt file
 
 ## Troubleshooting
 
 ### Common Issues:
-1. **400 Bad Request Error**: Usually caused by wrong start command
+1. **400 Bad Request Error**: Usually caused by ALLOWED_HOSTS or SECRET_KEY issues
 2. **Static files error**: Ensure the `static/` directory exists and contains files
 3. **Auth context processor error**: Fixed in settings.py
 4. **Port binding**: Use `$PORT` environment variable in start command
 5. **Build failures**: Check the build logs for specific error messages
 
-### If you see "No open ports detected":
-- Make sure your start command uses `$PORT` environment variable
-- The app should bind to `0.0.0.0:$PORT`
-
-### If you see "Starting development server":
-- You're using the wrong start command!
-- Use: `gunicorn twitter.wsgi:application --bind 0.0.0.0:$PORT`
-- NOT: `python manage.py runserver`
-
 ### If you get 400 errors:
-1. Check that you're using gunicorn, not runserver
-2. Verify the start command is correct
-3. Check that DEBUG is set to False in production
-4. Ensure ALLOWED_HOSTS includes your Render domain 
+1. **Check SECRET_KEY**: Must be a new, secure key (not the default)
+2. **Check ALLOWED_HOSTS**: Must include your Render domain
+3. **Check DEBUG**: Must be set to False in production
+4. **Check environment variables**: All must be set correctly in Render
+
+### Environment Variables Checklist:
+- ✅ `SECRET_KEY`: New, secure key (generate one!)
+- ✅ `DEBUG`: `False`
+- ✅ `ALLOWED_HOSTS`: `twiterrr.onrender.com,localhost,127.0.0.1`
+- ✅ `DATABASE_URL`: Automatically provided by Render
