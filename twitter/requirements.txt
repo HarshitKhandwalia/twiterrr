@@ -1,0 +1,20 @@
+# Core Django
+Django==4.2.20
+asgiref==3.8.1
+sqlparse==0.5.3
+typing_extensions==4.13.1
+
+# Image processing
+Pillow==11.1.0
+
+# Production server (for Render)
+gunicorn==21.2.0
+
+# Static file handling
+whitenoise==6.6.0
+
+# Database (for Render PostgreSQL)
+dj-database-url==2.1.0
+
+# Environment variables
+python-dotenv==1.0.0 
