@@ -38,13 +38,25 @@ git push origin main
 - Click "Create Web Service"
 - Render will build and deploy your app automatically
 
+## File Structure
+```
+DjangoTwitter/
+├── requirements.txt          # Production requirements (for Render)
+├── twitter/
+│   ├── requirements.txt     # Local development requirements
+│   ├── build.sh            # Build script for Render
+│   └── manage.py           # Django management
+```
+
 ## Local Development
-- Copy `env.example` to `.env`
+- Use `twitter/requirements.txt` for local development
+- Copy `twitter/env.example` to `twitter/.env`
 - Set `DEBUG=True` for local development
-- Run `python manage.py runserver`
+- Run `python manage.py runserver` from the `twitter/` directory
 
 ## Important Notes
 - Static files are automatically collected during build
 - Media files are handled by whitenoise
 - The app automatically switches between SQLite (local) and PostgreSQL (Render)
-- No Docker required - Render handles the containerization 
+- No Docker required - Render handles the containerization
+- The build script uses the root `requirements.txt` for production dependencies 

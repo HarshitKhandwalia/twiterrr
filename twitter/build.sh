@@ -2,7 +2,18 @@
 # exit on error
 set -o errexit
 
+echo "Starting build process..."
+echo "Current directory: $(pwd)"
+echo "Listing files:"
+ls -la
+
+echo "Installing production requirements..."
 pip install -r requirements.txt
 
+echo "Collecting static files..."
 python manage.py collectstatic --no-input
-python manage.py migrate 
+
+echo "Running migrations..."
+python manage.py migrate
+
+echo "Build completed successfully!" 
