@@ -6,4 +6,4 @@ startCommand = "python twitter/start.py"
 restartPolicyType = "on_failure"
 
 [environments.production]
-variables = { DEBUG = "False" }
+variables = { DEBUG = "False", CSRF_COOKIE_SECURE = "True", SESSION_COOKIE_SECURE = "True" }

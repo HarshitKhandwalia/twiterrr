@@ -20,6 +20,8 @@ cmd = [
 
 print(f"Starting server on port {port}")
 print(f"Working directory: {os.getcwd()}")
+print(f"DEBUG setting: {os.environ.get('DEBUG', 'Not set')}")
+print(f"RAILWAY_ENVIRONMENT: {os.environ.get('RAILWAY_ENVIRONMENT', 'Not set')}")
 print(f"Command: {' '.join(cmd)}")
 
 # Execute gunicorn

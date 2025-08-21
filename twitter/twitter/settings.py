@@ -169,6 +169,17 @@ LOGIN_REDIRECT_URL = '/tweet/'
 LOGOUT_REDIRECT_URL = '/tweet/'
 
 # CSRF settings - Configure trusted origins for both development and production
+# Always configure CSRF trusted origins
+CSRF_TRUSTED_ORIGINS = [
+    'https://twiterrr-production.up.railway.app',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000'
+]
+
+# Add debug logging for CSRF settings
+print(f"DEBUG: CSRF_TRUSTED_ORIGINS = {CSRF_TRUSTED_ORIGINS}")
+print(f"DEBUG: DEBUG setting = {DEBUG}")
+
 if not DEBUG:
     # Production settings
     SECURE_BROWSER_XSS_FILTER = True
@@ -177,17 +188,6 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
     X_FRAME_OPTIONS = 'DENY'
-    
-    # Add Railway domains to CSRF trusted origins
-    CSRF_TRUSTED_ORIGINS = [
-        'https://*.up.railway.app',
-        'https://twiterrr-production.up.railway.app',
-        'http://localhost:8000',
-        'http://127.0.0.1:8000'
-    ]
-else:
-    # Development settings
-    CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
 
 # CSRF settings
 CSRF_COOKIE_SECURE = os.environ.get('CSRF_COOKIE_SECURE', 'False').lower() == 'true'
