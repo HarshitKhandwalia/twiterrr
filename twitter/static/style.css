@@ -1,0 +1,24 @@
+/* Basic styles for the Twitter clone */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+    background-color: #1da1f2;
+    border-color: #1da1f2;
+}
+
+.btn-primary:hover {
+    background-color: #1991db;
+    border-color: #1991db;
+} 

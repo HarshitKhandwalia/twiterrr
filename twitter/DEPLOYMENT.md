@@ -23,7 +23,7 @@ git push origin main
 - **Name**: Choose a name for your app
 - **Environment**: Python 3
 - **Build Command**: `./build.sh`
-- **Start Command**: `gunicorn twitter.wsgi:application`
+- **Start Command**: `gunicorn twitter.wsgi:application --bind 0.0.0.0:$PORT`
 
 ### 4. Environment Variables (Set in Render Dashboard)
 - `SECRET_KEY`: Generate a new secret key
@@ -45,6 +45,7 @@ DjangoTwitter/
 ├── twitter/
 │   ├── requirements.txt     # Local development requirements
 │   ├── build.sh            # Build script for Render
+│   ├── static/             # Static files directory
 │   └── manage.py           # Django management
 ```
 
@@ -59,4 +60,16 @@ DjangoTwitter/
 - Media files are handled by whitenoise
 - The app automatically switches between SQLite (local) and PostgreSQL (Render)
 - No Docker required - Render handles the containerization
-- The build script uses the root `requirements.txt` for production dependencies 
+- The build script automatically finds the correct requirements.txt file
+
+## Troubleshooting
+
+### Common Issues:
+1. **Static files error**: Ensure the `static/` directory exists and contains files
+2. **Auth context processor error**: Fixed in settings.py
+3. **Port binding**: Use `$PORT` environment variable in start command
+4. **Build failures**: Check the build logs for specific error messages
+
+### If you see "No open ports detected":
+- Make sure your start command uses `$PORT` environment variable
+- The app should bind to `0.0.0.0:$PORT` 
