@@ -31,14 +31,28 @@ git push origin main
 - `SECRET_KEY`: Generate a new secret key (IMPORTANT: Don't use the default one!)
 - `DEBUG`: Set to `False`
 - `ALLOWED_HOSTS`: Set to `twiterrr.onrender.com,localhost,127.0.0.1`
+- `RENDER`: Set to `true` (tells Django it's running on Render)
 
 **⚠️ CRITICAL**: Generate a new SECRET_KEY! The default one in settings.py is not secure for production.
 
-### 5. Database
+### 5. Configure Persistent Disk for Media Files
+**IMPORTANT**: Set this up BEFORE your first deployment to avoid losing uploaded files!
+
+1. **In the Render Dashboard**, go to your Web Service
+2. **Navigate to "Disks"** in the left sidebar
+3. **Click "Add Disk"**:
+   - **Name**: `media-storage` (or any name you prefer)
+   - **Mount Path**: `/opt/render/project/src/media`
+   - **Size**: Start with 1GB (you can expand later)
+4. **Save the disk configuration**
+
+This persistent disk will store all uploaded media files (images, PDFs, etc.) and persist across deployments and restarts.
+
+### 6. Database
 - Render will automatically provide a `DATABASE_URL` environment variable
 - The app will use PostgreSQL on Render and SQLite locally
 
-### 6. Deploy
+### 7. Deploy
 - Click "Create Web Service"
 - Render will build and deploy your app automatically
 
@@ -61,8 +75,9 @@ DjangoTwitter/
 
 ## Important Notes
 - Static files are automatically collected during build
-- Media files are handled by whitenoise
+- **Media files are stored on a persistent disk** and won't be lost during deployments
 - The app automatically switches between SQLite (local) and PostgreSQL (Render)
+- Media files are served by Django in production (suitable for hobby projects)
 - No Docker required - Render handles the containerization
 
 ## Troubleshooting
@@ -84,4 +99,10 @@ DjangoTwitter/
 - ✅ `SECRET_KEY`: New, secure key (generate one!)
 - ✅ `DEBUG`: `False`
 - ✅ `ALLOWED_HOSTS`: `twiterrr.onrender.com,localhost,127.0.0.1`
+- ✅ `RENDER`: `true` (enables persistent disk media storage)
 - ✅ `DATABASE_URL`: Automatically provided by Render
+
+### Media Files Troubleshooting:
+1. **Uploaded files disappear after deployment**: Ensure persistent disk is configured with mount path `/opt/render/project/src/media`
+2. **Can't access uploaded images**: Check that `RENDER=true` environment variable is set
+3. **Media files not displaying**: Verify the persistent disk is properly mounted and has sufficient storage

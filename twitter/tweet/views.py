@@ -15,24 +15,7 @@ def test_view(request):
     """Simple test view to debug 400 errors"""
     return HttpResponse("Test view working! Request method: " + request.method)
 
-def serve_media(request, path):
-    """Custom view to serve media files in production"""
-    file_path = os.path.join(settings.MEDIA_ROOT, path)
-    if os.path.exists(file_path):
-        with open(file_path, 'rb') as f:
-            response = HttpResponse(f.read())
-            # Set content type based on file extension
-            if path.endswith('.jpg') or path.endswith('.jpeg'):
-                response['Content-Type'] = 'image/jpeg'
-            elif path.endswith('.png'):
-                response['Content-Type'] = 'image/png'
-            elif path.endswith('.gif'):
-                response['Content-Type'] = 'image/gif'
-            else:
-                response['Content-Type'] = 'application/octet-stream'
-            return response
-    else:
-        raise Http404("File not found")
+# Custom media serving removed - using Django's built-in static file serving instead
 
 def tweet_list(request):
   tweets = Tweet.objects.all().order_by('-created_at')

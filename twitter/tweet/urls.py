@@ -8,5 +8,5 @@ urlpatterns = [
     path('<int:tweet_id>/edit/', views.tweet_edit,name='tweet_edit'),
     path('<int:tweet_id>/del/', views.tweet_del,name='tweet_del'),
     path('register/',views.register,name='register'),
-    path('media/<path:path>', views.serve_media, name='serve_media'),
+    # Removed custom media handler - using Django's built-in static file serving instead
 ]

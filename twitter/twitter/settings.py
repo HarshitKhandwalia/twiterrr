@@ -140,9 +140,21 @@ STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-# Media files
+# Media files configuration
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Configure MEDIA_ROOT based on environment
+# Locally: use media/ folder in project root
+# On Render: use /opt/render/project/src/media (backed by persistent disk)
+if os.environ.get('RENDER'):
+    # Production on Render - use persistent disk mount point
+    MEDIA_ROOT = '/opt/render/project/src/media'
+else:
+    # Local development - use media folder in project
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Ensure media directory exists
+os.makedirs(MEDIA_ROOT, exist_ok=True)
 
 # Enable media file serving in production (for simple projects)
 SERVE_MEDIA = True
