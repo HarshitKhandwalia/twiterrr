@@ -18,7 +18,7 @@ Twiterrrrr - Your Tweets
 
         <div class="tweet-cards-container">
             {% for tweet in tweets %}
-            <div class="tweet-card-large">
+            <div class="tweet-card-large {% if tweet.photo %}with-image{% else %}without-image{% endif %}">
                 {% if tweet.photo %}
                 <div class="tweet-image-container-large">
                     <img src="{{tweet.photo.url}}" class="tweet-image-large" alt="Tweet image">

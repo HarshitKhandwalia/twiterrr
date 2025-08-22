@@ -449,8 +449,9 @@
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 1rem;
+            gap: 1.5rem;
             padding: 0 1rem;
+            align-items: start;
         }
         
         .tweet-card-large {
@@ -463,7 +464,75 @@
             width: 100%;
             max-width: 380px;
             justify-self: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 200px;
+        }
+        
+        .tweet-card-large.with-image {
             aspect-ratio: 4/5;
+            min-height: 400px;
+        }
+        
+        .tweet-card-large.without-image {
+            aspect-ratio: auto;
+            min-height: 180px;
+            max-height: 280px;
+        }
+        
+        .tweet-card-large.without-image .tweet-content-large {
+            border-radius: 16px;
+            padding: 1.25rem;
+        }
+        
+        .tweet-card-large.without-image .tweet-text-large {
+            margin-bottom: 1.5rem;
+        }
+        
+        .tweet-card-large.without-image .tweet-header-info-large {
+            margin-bottom: 1rem;
+        }
+        
+        .tweet-card-large.without-image .tweet-actions-large {
+            margin-top: 1rem;
+        }
+        
+        /* Additional styling for text-only cards */
+        .tweet-card-large.without-image .tweet-text-large p {
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+        
+        .tweet-card-large.without-image .username-large {
+            font-size: 1rem;
+        }
+        
+        .tweet-card-large.without-image .timestamp-large {
+            font-size: 0.85rem;
+        }
+        
+        /* Enhanced styling for text-only cards */
+        .tweet-card-large.without-image {
+            border: 1px solid #e8dcc0;
+            background: linear-gradient(135deg, #fefcf7 0%, #f8f4ed 100%);
+        }
+        
+        .tweet-card-large.without-image:hover {
+            border-color: #d4c4a8;
+            background: linear-gradient(135deg, #fefcf7 0%, #f5f1eb 100%);
+        }
+        
+        /* Force text-only cards to be compact */
+        .tweet-card-large.without-image {
+            height: auto !important;
+            max-height: 280px !important;
+            min-height: 180px !important;
+        }
+        
+        /* Ensure content fits properly in text-only cards */
+        .tweet-card-large.without-image .tweet-content-large {
+            height: auto !important;
+            max-height: none !important;
         }
         
         .tweet-card-large:hover {
@@ -478,6 +547,7 @@
             background-color: #f5f1eb;
             position: relative;
             border-radius: 16px 16px 0 0;
+            flex-shrink: 0;
         }
         
         .tweet-image-large {
@@ -504,6 +574,10 @@
         .tweet-content-large {
             padding: 1rem;
             background: rgba(254, 252, 247, 0.95);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         
         .tweet-header-info-large {
@@ -544,6 +618,7 @@
         
         .tweet-text-large {
             margin-bottom: 1rem;
+            flex: 1;
         }
         
         .tweet-text-large p {
@@ -557,6 +632,7 @@
             display: flex;
             gap: 0.5rem;
             justify-content: flex-end;
+            margin-top: auto;
         }
         
         .tweet-actions-large .btn {
@@ -599,6 +675,7 @@
             .tweet-card-large {
                 margin: 0;
                 max-width: 100%;
+                aspect-ratio: auto;
             }
             
             .form-actions {
