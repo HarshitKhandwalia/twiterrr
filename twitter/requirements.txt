@@ -6,3 +6,4 @@ typing_extensions==4.13.1
 
 # Image processing
 Pillow==11.1.0 
+psycopg2
