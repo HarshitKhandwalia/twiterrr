@@ -9,3 +9,5 @@ Pillow==11.1.0
 
 # Simple production server (for Render)
 gunicorn==21.2.0
+
+psycopg2
